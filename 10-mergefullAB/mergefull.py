@@ -25,60 +25,64 @@ abaMerge = "ServidoresMerge"  # Aba que recebera os dados mesclados
 # ##############################################
 
 # Abrindo arquivos
-wb1 = openpyxl.load_workbook(arqA)
-wb2 = openpyxl.load_workbook(arqB)
-wb3 = openpyxl.load_workbook(arqMerge)
+wbA = openpyxl.load_workbook(arqA)
+wbB = openpyxl.load_workbook(arqB)
+wbC = openpyxl.load_workbook(arqMerge)
 
 # Abrind abas das planilhas
-sheetA = wb1.get_sheet_by_name(abaA)
-sheetB = wb2.get_sheet_by_name(abaB)
-sheetMerge = wb3.get_sheet_by_name(abaMerge)
+sheetA = wbA.get_sheet_by_name(abaA)
+sheetB = wbB.get_sheet_by_name(abaB)
+sheetMerge = wbC.get_sheet_by_name(abaMerge)
 
 # Listas que serao utilizadas
-srv1 = []
-linha = []
-coluna = []
-srv2 = []
+srvA = []
+srvB = []
+# linhaB = []
 
-# Percorrendo planilha os vms e armazenando nas listas
+# Percorrendo planilhaA e armazenando todos os valores em srvA
 for row in range(inicioA, sheetA.max_row + 1):
-    srv1.append(sheetA[colMatchA + str(row)].value)
+    srvA.append(sheetA[colMatchA + str(row)].value)
 
+# Percorrendo planilhaB e armazenando todos os valores em srvB
 for row in range(inicioB, sheetB.max_row + 1):
-    srv2.append(sheetB[colMatchB + str(row)].value)
-    linha.append(row)
+    srvB.append(sheetB[colMatchB + str(row)].value)
+    # linhaB.append(row)  # Armazenando o numero da linha que o elemento esta
 
-# Limpando todos os dados da planilha de merge
+# Limpando previamente todos os dados da planilha de merge
 for row in sheetMerge.rows:
     for cell in row:
         sheetMerge.cell(row=cell.row, column=cell.column).value = ""
 
-a = inicioB  # Comcecando de 2 para pular a primeinha linha
+# Comcecando da linha InicioB,
+# para assim manter a mesma formatacao da planilhaB
+a = inicioB
 
-# Verificand
-for srv in srv1:
-    if srv in srv2:
-        index = srv2.index(srv)
+for srv in srvA:  # Validando se o elemento srv existe dentro da lista srv1
+    if srv in srvB:  # Caso existir pegue o elemento, item COMUM
+        index = srvB.index(srv)  # Armazenando o index do elemento
         # Percorrendo todas as colunas do arquivo
         for col in range(1, sheetB.max_column + 1):
             # Gravando todos valores das colunas do arquivoB no arquivo Merge
             sheetMerge.cell(row=a, column=col).value = sheetB.cell(
                 row=index+inicioB, column=col).value
-        # Gravando na ultima coluna o valor COMUM
+        # Gravando na ultima coluna o valor comum
         sheetMerge.cell(row=a, column=sheetB.max_column+1).value = "Comum"
-    else:
+    else:  # Caso o elemento nao exista, item INCOMUM
         # Caso o item seja incomum, gravar apenas o nome do servidor
         sheetMerge.cell(row=a, column=column_index_from_string(
             colMatchB)).value = srv
-        # Gravando na ultima coluna o valor INCOMUM
+        # Gravando na ultima coluna o valor incomum
         sheetMerge.cell(row=a, column=sheetB.max_column+1).value = "Incomum"
     a = a + 1
 
+# Percorrendo novamente todas as colunas do arB para gravar o cabecalho
 for col in range(1, sheetB.max_column + 1):
     # Gravando os valores do cabecalho da primeira linha
     # inicioB-1 = Valor do cabecalho da planilha B
     sheetMerge.cell(
         row=inicioB-1, column=col).value = sheetB.cell(row=inicioB-1, column=col).value
 
+sheetMerge.cell(row=inicioB-1, column=sheetB.max_column+1).value = "Tipo"
+
 # Salva as alteracoes no arquivo de merge
-wb3.save(arqMerge)
+wbC.save(arqMerge)
