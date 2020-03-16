@@ -18,14 +18,14 @@ e salvar na coluna "colresult" da aba "abaB"
 arq = "servidores-exemplo.xlsx"  # Arquivo de exel para ser analizado
 
 abaA = "Servidores"  # Aba que contem o grupo de dados maior
-colMatchA = "A"  # Coluna que os dados seram comparados
+colMatchA = "A"  # Coluna que os dados seram comparados com abaB
 inicioA = 8  # Numero da linha que os dados iniciam
 
 abaB = "Aplicacoes"  # Aba que contem o grupo de dados menor
-colMatchB = "B"  # Coluna
+colMatchB = "B"  # Coluna que a abaA comparara
 inicioB = 6  # Numero da linha que os dados iniciam
 
-# Coluna que os elmentos sera coletados
+# Coluna que os elementos serao coletados
 # Para salvar na planilha
 colTarget = "A"
 colresult = "H"  # Coluna que sera salvo o resultado
