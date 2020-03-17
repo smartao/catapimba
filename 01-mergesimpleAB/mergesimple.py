@@ -15,13 +15,14 @@ e salvar na coluna "colresult" da aba "abaB"
 
 # ####### Variavies de configuracoes #######
 
-arq = "servidores-exemplo.xlsx"  # Arquivo de exel para ser analizado
+arqA = "servidores.xlsx"  # Arquivo de exel para ser analizado
+arqB = "aplicativos.xlsx"  # Arquivo de exel para ser analizado
 
 abaA = "Servidores"  # Aba que contem o grupo de dados maior
 colMatchA = "A"  # Coluna que os dados seram comparados com abaB
 inicioA = 8  # Numero da linha que os dados iniciam
 
-abaB = "Aplicacoes"  # Aba que contem o grupo de dados menor
+abaB = "Aplicativos"  # Aba que contem o grupo de dados menor
 colMatchB = "B"  # Coluna que a abaA comparara
 inicioB = 6  # Numero da linha que os dados iniciam
 
@@ -33,24 +34,25 @@ colresult = "H"  # Coluna que sera salvo o resultado
 # ##########################################
 
 # Abrindo o arquivo Excel
-wb1 = openpyxl.load_workbook(arq)
+wbA = openpyxl.load_workbook(arqA)
+wbB = openpyxl.load_workbook(arqB)
 
 # Abrindo as planilhas de servidores e aplicacoes
-sheetSrv = wb1.get_sheet_by_name(abaA)
-sheetApp = wb1.get_sheet_by_name(abaB)
+sheetA = wbA.get_sheet_by_name(abaA)
+sheetB = wbB.get_sheet_by_name(abaB)
 
 srv1 = []  # Lista para armazenar os servidores
 srv2 = []  # Lista para armazenar os produtos e pegar os codigos
 target = []  # Codigos dos repectivos produtos
 
 # Percorrendo aba com servidores
-for row in range(inicioA, sheetSrv.max_row + 1):
-    srv1.append(sheetSrv[colMatchA + str(row)].value)
+for row in range(inicioA, sheetA.max_row + 1):
+    srv1.append(sheetA[colMatchA + str(row)].value)
 
 # Percorrendo planilha que tem servidores e aplicações
-for row in range(inicioB, sheetApp.max_row + 1):
-    srv2.append(sheetApp[colMatchB + str(row)].value)
-    target.append(sheetApp[colTarget + str(row)].value)
+for row in range(inicioB, sheetB.max_row + 1):
+    srv2.append(sheetB[colMatchB + str(row)].value)
+    target.append(sheetB[colTarget + str(row)].value)
 
 # Nova coluna onde sera granva os dados
 novacoluna = column_index_from_string(colresult)
@@ -66,9 +68,9 @@ for i in range(len(srv1)):
     else:
         result = 'SRV NAO IDENTIFICADO'
     # Gravando os valores do campo
-    sheetSrv.cell(row=inicioA+i, column=novacoluna).value = result
+    sheetA.cell(row=inicioA+i, column=novacoluna).value = result
 
 # Gravando o cabecalho do campo
-sheetSrv.cell(row=inicioA-1, column=novacoluna).value = abaB
+sheetA.cell(row=inicioA-1, column=novacoluna).value = abaB
 
-wb1.save(arq)  # Salvando as modificacoes no arquivo
+wbA.save(arqA)  # Salvando as modificacoes no arquivo
