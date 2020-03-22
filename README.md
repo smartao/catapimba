@@ -8,10 +8,12 @@ Script para automacoes de planilhas de excel
 ## Pré requisitos
 
 ```
-Python
-Pacote Python3
-Pacote pip3
-Biblioteca openpyxl
+Pacotes
+Python3
+pip3
+Bibliotecas
+openpyxl
+pyperclip
 
 Arquivo xlsx
 Permissão leitura e escrita
