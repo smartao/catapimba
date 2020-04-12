@@ -6,12 +6,11 @@ from openpyxl.utils import column_index_from_string
 
 arqA = "lista.xlsx"
 abaA = "Service principals"
-inicioA = 5  # Inicio
-colunasA = ["A", "C", "E", "F", "G"]
-esp = "  "  # Espacamento padrao terraforme
+inicioA = 5  # Inicio da linha com os dados
+# status, role, idapp, displayname, homepage, logouturl, scope
+colunasA = ["A", "C", "D", "F", "G", "H", "N"]
 dirlogs = "logs"
-
-statusdesejado = "NãoVai"
+statusnaodesejado = "NãoVai"
 
 
 def main():
@@ -29,17 +28,20 @@ def main():
         
         status = sheetA.cell(row=row, column=colunasAn[0]).value
         
-        # Validando o status na coluna A
-        if status != statusdesejado:
-            idapp = sheetA.cell(row=row, column=colunasAn[1]).value
-            sp = sheetA.cell(row=row, column=colunasAn[2]).value
+        # Validando o status na coluna A  
+        if status != statusnaodesejado:
+            role = sheetA.cell(row=row, column=colunasAn[1]).value
+            idapp = sheetA.cell(row=row, column=colunasAn[2]).value
+            
+            sp = sheetA.cell(row=row, column=colunasAn[3]).value
             spnew = sp.replace(" ", "-")
             
-            homepage = sheetA.cell(row=row, column=colunasAn[3]).value
-            logouturl = sheetA.cell(row=row, column=colunasAn[4]).value
-
+            homepage = sheetA.cell(row=row, column=colunasAn[4]).value
+            logouturl = sheetA.cell(row=row, column=colunasAn[5]).value
+            scope = sheetA.cell(row=row, column=colunasAn[6]).value
+            
             # Imprimindo reusltando na tela
-            print (idapp + "," + spnew + "," + str(homepage) + "," + str(logouturl))
+            print (idapp + "," + role + "," + spnew + "," + str(homepage) + "," + str(logouturl) + "," + str(scope))
 
 
 if __name__ == '__main__':

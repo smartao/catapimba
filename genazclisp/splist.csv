@@ -1,4 +1,4 @@
-1111aaa-1234-4567-1c34-111111aaaaaaa,aplicacao-1,http://xxxx.hml.com,None
-3333aaa-3333-3333-3c33-333333aaaaaaa,aplicacao-3-aks,http://wwwakslogin.com,http://wwwakslogout.com
-4444aaa-4444-4444-4c44-444444aaaaaaa,aplicacao-4-aks2,http://xpto.com,http://xptologout.com
-6666aaa-6666-6666-6c66-666666aaaaaaa,aplicacao-6,http://acme.22222.com,None
+1111aaa-1234-4567-1c34-111111aaaaaaa,reader,aplicacao-1,http://xxxx.hml.com,None,xxxxx
+3333aaa-3333-3333-3c33-333333aaaaaaa,NAOENCONTRADO,aplicacao-3-aks,http://wwwakslogin.com,http://wwwakslogout.com,xxxxx
+4444aaa-4444-4444-4c44-444444aaaaaaa,contributor,aplicacao-4-aks2,http://xpto.com,http://xptologout.com,xxxxx
+6666aaa-6666-6666-6c66-666666aaaaaaa,contributor,aplicacao-6,http://acme.22222.com,None,xxxxx

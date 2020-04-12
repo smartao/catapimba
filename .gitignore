@@ -2,9 +2,13 @@
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Temp
 .~*
+~$*
 .~lock*
 *.tmp
+lista-modal.xlsx
 
 # C extensions
 *.so
