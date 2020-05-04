@@ -12,6 +12,7 @@ colunasA = ["A", "C", "D", "F", "G", "H", "N"]
 dirlogs = "logs"
 statusnaodesejado = "NãoVai"
 
+# ##########################################
 
 def main():
     wbA = openpyxl.load_workbook(arqA, data_only=True)  # Abrindo arquivo
